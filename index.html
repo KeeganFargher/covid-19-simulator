@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous"
+		/>
+
+		<link rel="stylesheet" href="styles/styles.css" />
+
+		<title>Document</title>
+	</head>
+	<body>
+		<main class="main container-fluid">
+			<div class="row">
+				<div class="col-8"><div class="sketch" id="sketch-holder"></div></div>
+				<div class="col-4">
+					<h5 id="infected">Infected: 0</h5>
+					<h5 id="susceptible">Susceptible: 0</h5>
+					<h5 id="dead">Dead: 0</h5>
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Settings</h5>
+							<hr />
+
+							<div class="form-group">
+								<label for="people">People</label>
+								<input
+									class="form-control"
+									type="number"
+									name="people"
+									id="people"
+									value="500"
+									min="2"
+									max="1000"
+									onchange="updatePeople()"
+								/>
+							</div>
+
+							<!-- Social Distancing -->
+							<h5 class="card-title">Social Distancing</h5>
+
+							<div class="form-group">
+								<label for="social-distance-factor">Social Distance Factor (0 - 10)</label>
+								<input
+									class="form-control"
+									type="number"
+									name="social-distance-factor"
+									id="social-distance-factor"
+									value="1"
+									min="0"
+									max="10"
+								/>
+								<small>0 means no distancing</small>
+							</div>
+
+							<!-- Infection -->
+							<h5 class="card-title">Infection</h5>
+
+							<div class="form-group">
+								<label for="infection-initial-victims">Initial Victims % (1 - 100)</label>
+								<input
+									class="form-control"
+									type="number"
+									name="infection-initial-victims"
+									id="infection-initial-victims"
+									value="1"
+									min="1"
+									max="100"
+									onchange="updatePeople()"
+								/>
+								<small>Percentage of population infected at the beginning</small>
+							</div>
+
+							<div class="form-group">
+								<label for="infection-spread-chance">Spread Chance % (0 - 100)</label>
+								<input
+									class="form-control"
+									type="number"
+									name="infection-spread-chance"
+									id="infection-spread-chance"
+									value="2"
+									min="0"
+									max="100"
+									onchange="updatePeople()"
+								/>
+							</div>
+
+							<div class="form-group">
+								<label for="infection-radius">Infection Radius (1 - 50)</label>
+								<input
+									class="form-control"
+									type="number"
+									name="infection-radius"
+									id="infection-radius"
+									value="10"
+									min="1"
+									max="50"
+								/>
+								<small>The red circle</small>
+							</div>
+
+							<div class="form-group">
+								<label for="infection-death-chance">Death Chance % (0 - 100)</label>
+								<input
+									class="form-control"
+									type="number"
+									name="infection-death-chance"
+									id="infection-death-chance"
+									value="2"
+									min="0"
+									max="100"
+								/>
+							</div>
+
+							<button class="btn btn-primary w-100" onclick="startSimulation()">START</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js"></script>
+
+		<script src="scripts/Mover.js"></script>
+		<script src="scripts/sketch.js" defer></script>
+
+		<script
+			src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>
