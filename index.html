@@ -19,7 +19,10 @@
 	<body>
 		<main class="main container-fluid">
 			<div class="row">
-				<div class="col-8"><div class="sketch" id="sketch-holder"></div></div>
+				<div class="col-8">
+					<div class="sketch" id="sketch-holder"></div>
+					<canvas id="graph-tracker" width="auto" height="100%"></canvas>
+				</div>
 				<div class="col-4">
 					<h5 id="infected">Infected: 0</h5>
 					<h5 id="susceptible">Susceptible: 0</h5>
@@ -53,7 +56,7 @@
 									type="number"
 									name="social-distance-factor"
 									id="social-distance-factor"
-									value="1"
+									value="0"
 									min="0"
 									max="10"
 								/>
@@ -85,7 +88,7 @@
 									type="number"
 									name="infection-spread-chance"
 									id="infection-spread-chance"
-									value="2"
+									value="4"
 									min="0"
 									max="100"
 									onchange="updatePeople()"
@@ -99,7 +102,7 @@
 									type="number"
 									name="infection-radius"
 									id="infection-radius"
-									value="10"
+									value="12"
 									min="1"
 									max="50"
 								/>
@@ -113,7 +116,7 @@
 									type="number"
 									name="infection-death-chance"
 									id="infection-death-chance"
-									value="2"
+									value="1"
 									min="0"
 									max="100"
 								/>
@@ -125,6 +128,9 @@
 				</div>
 			</div>
 		</main>
+
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+		<script src="scripts/graph.js" defer></script>
 
 		<script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js"></script>
 

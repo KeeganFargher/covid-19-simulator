@@ -81,7 +81,7 @@ function Mover(x, y, infectedParam, susceptibleParam, removedParam) {
 			}
 
 			/* INFECTION */
-			if (!removed && infected && !other.getInfected()) {
+			if (!removed && infected && !other.getInfected() && simulationRunning) {
 				const infectionChance = random(0, 1);
 				if (distance < INFECTION_RADIUS && infectionChance < SPREAD_CHANCE / 100 && distance > 0) {
 					other.setInfected();
@@ -99,7 +99,7 @@ function Mover(x, y, infectedParam, susceptibleParam, removedParam) {
 			applyForce(steer);
 		}
 
-		if (infected && !removed) {
+		if (infected && !removed && simulationRunning) {
 			const deathChance = random(0, 1);
 
 			// Kill em

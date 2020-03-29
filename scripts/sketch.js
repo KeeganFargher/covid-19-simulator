@@ -2,7 +2,7 @@ let movers;
 
 let people = 500;
 
-const RADIUS = 10;
+const RADIUS = 7;
 const MAX_SPEED = 0.5;
 const MAX_FORCE = 0.2;
 const BOUNDARY = 10;
@@ -13,6 +13,7 @@ let SPREAD_CHANCE;
 let DEATH_CHANCE;
 
 let radiusAnimator = 1.0;
+let graphUpdateCounter = 1;
 
 let infectedCount = 0;
 let susceptibleCount = people;
@@ -21,7 +22,7 @@ let deadCount = 0;
 let simulationRunning = false;
 
 function setup() {
-	let canvas = createCanvas(windowWidth / 1.5, windowHeight);
+	let canvas = createCanvas(windowWidth / 1.5, windowHeight / 2);
 
 	INFECTION_RADIUS = document.getElementById("infection-radius").value;
 	INFECTION_RADIUS = document.getElementById("infection-radius").value;
@@ -39,7 +40,7 @@ function setup() {
 function draw() {
 	background(0);
 
-	console.log(frameRate());
+	// console.log(frameRate());
 
 	const socialDistanceFactor = document.getElementById("social-distance-factor").value;
 
@@ -50,7 +51,7 @@ function draw() {
 	DEATH_CHANCE = document.getElementById("infection-death-chance").value;
 
 	movers.forEach(mover => {
-		simulationRunning && mover.separate(movers, socialDistanceFactor);
+		mover.separate(movers, socialDistanceFactor);
 		mover.boundaries();
 		mover.update();
 		mover.show();
@@ -61,9 +62,24 @@ function draw() {
 		radiusAnimator = 1;
 	}
 
+	if (simulationRunning) {
+		graphUpdateCounter++;
+		if (graphUpdateCounter % 50 === 0) {
+			myChart.data.datasets[0].data.push(infectedCount);
+			myChart.data.datasets[1].data.push(susceptibleCount);
+			myChart.data.datasets[2].data.push(deadCount);
+			myChart.data.labels.push(graphUpdateCounter / 100);
+			myChart.update();
+		}
+	}
+
 	document.getElementById("infected").innerHTML = "Infected: " + infectedCount;
 	document.getElementById("susceptible").innerHTML = "Susceptible: " + susceptibleCount;
 	document.getElementById("dead").innerHTML = "Dead: " + deadCount;
+
+	if (infectedCount === 0) {
+		simulationRunning = false;
+	}
 }
 
 function updatePeople() {
