@@ -2,7 +2,7 @@ let movers;
 
 let people = 500;
 
-const RADIUS = 7;
+let RADIUS = 7;
 const MAX_SPEED = 0.5;
 const MAX_FORCE = 0.2;
 const BOUNDARY = 10;
@@ -23,6 +23,10 @@ let simulationRunning = false;
 
 function setup() {
 	let canvas = createCanvas(windowWidth / 1.5, windowHeight / 2);
+
+	if (windowWidth < 500) {
+		RADIUS = 3;
+	}
 
 	INFECTION_RADIUS = document.getElementById("infection-radius").value;
 	INFECTION_RADIUS = document.getElementById("infection-radius").value;
