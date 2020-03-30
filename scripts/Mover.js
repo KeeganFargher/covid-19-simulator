@@ -82,6 +82,12 @@ function Mover(x, y, infectedParam, susceptibleParam, removedParam) {
 
 			/* INFECTION */
 			if (!removed && infected && !other.getInfected() && simulationRunning) {
+				if (distance < INFECTION_RADIUS * 2) {
+					stroke(184, 72, 61);
+					strokeWeight(2);
+					line(other.getPosition().x, other.getPosition().y, position.x, position.y);
+				}
+
 				const infectionChance = random(0, 1);
 				if (distance < INFECTION_RADIUS && infectionChance < SPREAD_CHANCE / 100 && distance > 0) {
 					other.setInfected();
@@ -150,13 +156,6 @@ function Mover(x, y, infectedParam, susceptibleParam, removedParam) {
 	}
 
 	function show() {
-		if (infected && !removed) {
-			strokeWeight(3);
-			stroke("#b8483d");
-			fill(0, 0);
-			ellipse(position.x, position.y, RADIUS * radiusAnimator);
-		}
-
 		strokeWeight(0);
 
 		if (removed) {
